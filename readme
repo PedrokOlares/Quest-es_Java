@@ -1,0 +1,33 @@
+5 Questões Difíceis sobre Get, Set, Métodos e
+Construtores em Java
+
+1. Considere uma classe ContaBancaria com atributos privados saldo e titular. Implemente os
+métodos get e set de forma que o saldo nunca possa receber valores negativos. Explique por que
+permitir acesso direto ao atributo saldo viola o encapsulamento e quais problemas isso pode
+causar em sistemas reais.
+R= //se vc permitir o saldo como atributo publico vc deixa exposto uma area de suma importancia que se violado será de grande perda para empresa (e saldo n pode ser facilmente instaciado de formas maliciosas).
+
+2. Analise o código abaixo e determine a saída exata: class Produto { private String nome; public
+Produto() { this("Sem Nome"); } public Produto(String nome) { this.nome = nome; } public String
+getNome() { return nome; } } public class Teste { public static void main(String[] args) { Produto p1 =
+new Produto(); Produto p2 = new Produto("Notebook"); System.out.println(p1.getNome());
+System.out.println(p2.getNome()); } } Explique detalhadamente o papel do construtor padrão e do
+construtor parametrizado.
+R= 
+3. Crie uma classe Funcionario com os atributos privados nome e salario. Implemente um
+construtor que receba ambos os valores e um método aplicarAumento(double percentual). O
+método deve validar percentuais inválidos e atualizar o salário corretamente. Descreva quais
+princípios de orientação a objetos estão sendo utilizados.
+
+4. Dado o código: class Pessoa { private String nome; public Pessoa(String nome) {
+setNome(nome); } public void setNome(String nome) { if(nome != null && nome.length() >= 3) {
+this.nome = nome; } } public String getNome() { return nome; } } Explique por que o construtor
+utiliza o método setNome em vez de atribuir diretamente o valor ao atributo. Quais vantagens essa
+abordagem oferece em aplicações grandes?
+
+
+5. Uma classe Carro possui os atributos privados modelo e velocidade. Implemente: - Um
+construtor que receba o modelo. - Métodos get e set para modelo. - Um método acelerar(int
+incremento). - Um método frear(int decremento). A velocidade nunca pode ficar negativa e nunca
+pode ultrapassar 220 km/h. Explique como os métodos podem garantir essas regras sem expor os
+atributos diretamente.
