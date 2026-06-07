@@ -3,6 +3,15 @@ package package_04;
 public class ContaBancaria {
     private int Saldo;
     private String titular;
+    private int valor_depositado;
+
+    public int getValor_depositado() {
+        return valor_depositado;
+    }
+
+    public void setValor_depositado(int valor_depositado) {
+        this.valor_depositado = valor_depositado;
+    }
 
     public ContaBancaria(int saldo, String titular) {
         this.Saldo = saldo;
@@ -25,14 +34,14 @@ public class ContaBancaria {
         this.titular = titular;
     }
 
-    public int SaldoCliente(int Saldo, int valor_depositado) {
-        this.Saldo = valor_depositado;
-        if (this.Saldo < 0) {
-            System.out.println("valor menor que 0 pai");
-        } else
-            ;
-        return this.Saldo;
+    public int SaldoCliente(int valor_depositado) {
 
+        if (valor_depositado < 0) {
+            System.out.println("Valor inválido!");
+        } else {
+            this.Saldo += valor_depositado;
+        }
+        return this.Saldo;
     }
 
 }
