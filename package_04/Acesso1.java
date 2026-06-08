@@ -8,7 +8,7 @@ public class Acesso1 {
 
         System.out.println("Saldo antes da adição: " + conta.getSaldo());
 
-        conta.SaldoCliente(100);
+        conta.SaldoCliente(600);
 
         System.out.println("Saldo após a adição: " + conta.getSaldo());
 
