@@ -1,33 +1,39 @@
-5 Questões Difíceis sobre Get, Set, Métodos e
-Construtores em Java
+# 🚀 Desafio Fintech: Sistema de Gestão de Contratos de Freelancers
 
-1. Considere uma classe ContaBancaria com atributos privados saldo e titular. Implemente os
-métodos get e set de forma que o saldo nunca possa receber valores negativos. Explique por que
-permitir acesso direto ao atributo saldo viola o encapsulamento e quais problemas isso pode
-causar em sistemas reais.
-R= //se vc permitir o saldo como atributo publico vc deixa exposto uma area de suma importancia que se violado será de grande perda para empresa (e saldo n pode ser facilmente instaciado de formas maliciosas).
+Módulo financeiro avançado desenvolvido em Java para o gerenciamento, cálculo de provisões fiscais, bônus de produtividade e controle de status de contratos de desenvolvedores freelancers.
 
-2. Analise o código abaixo e determine a saída exata: class Produto { private String nome; public
-Produto() { this("Sem Nome"); } public Produto(String nome) { this.nome = nome; } public String
-getNome() { return nome; } } public class Teste { public static void main(String[] args) { Produto p1 =
-new Produto(); Produto p2 = new Produto("Notebook"); System.out.println(p1.getNome());
-System.out.println(p2.getNome()); } } Explique detalhadamente o papel do construtor padrão e do
-construtor parametrizado.
-R= 
-3. Crie uma classe Funcionario com os atributos privados nome e salario. Implemente um
-construtor que receba ambos os valores e um método aplicarAumento(double percentual). O
-método deve validar percentuais inválidos e atualizar o salário corretamente. Descreva quais
-princípios de orientação a objetos estão sendo utilizados.
+## 📌 Contexto do Desafio
+O objetivo deste projeto é aplicar conceitos rígidos de **Orientação a Objetos**, focando principalmente em **Encapsulamento**, imutabilidade de dados (restrição de métodos modificadores `set`) e implementação de regras de negócio complexas centralizadas no modelo.
 
-4. Dado o código: class Pessoa { private String nome; public Pessoa(String nome) {
-setNome(nome); } public void setNome(String nome) { if(nome != null && nome.length() >= 3) {
-this.nome = nome; } } public String getNome() { return nome; } } Explique por que o construtor
-utiliza o método setNome em vez de atribuir diretamente o valor ao atributo. Quais vantagens essa
-abordagem oferece em aplicações grandes?
+## ⚙️ Regras de Negócio e Arquitetura
 
+### 1. Entidade `Contrato`
+A classe deve conter os seguintes atributos e comportamentos:
+*   **Atributos Privados (`private`):**
+    *   `desenvolvedor` (String) - Imutável após a criação.
+    *   `valorHora` (double) - Imutável após a criação.
+    *   `horasTrabalhadas` (int)
+    *   `status` (String) - Inicializado automaticamente como `"ATIVO"`.
+*   **Encapsulamento Restrito:** Proibido o uso de métodos `set`. As alterações de estado devem ocorrer exclusivamente através de métodos de suporte específicos.
+*   **Método `calcularPagamentoLiquido(double impostoRetido)`:**
+    1.  **Validação de Estado:** Se o status do contrato for igual a `"FINALIZADO"`, o retorno deve ser obrigatoriamente `0.0`.
+    2.  **Cálculo Base:** $\text{Horas Trabalhadas} \times \text{Valor da Hora}$.
+    3.  **Gatilho de Bônus:** Se as horas trabalhadas forem estritamente superiores a 160 horas, aplica-se um bônus de **15%** sobre o valor base.
+    4.  **Dedução Fiscal:** O percentual de imposto passado por parâmetro (ex: `12.0` para 12%) deve ser calculado e subtraído sobre o montante acumulado (Base + Bônus).
+    5.  **Retorno:** Valor líquido final disponível para o profissional.
+*   **Método `finalizarContrato()`:** Transiciona o estado do atributo `status` de `"ATIVO"` para `"FINALIZADO"`.
 
-5. Uma classe Carro possui os atributos privados modelo e velocidade. Implemente: - Um
-construtor que receba o modelo. - Métodos get e set para modelo. - Um método acelerar(int
-incremento). - Um método frear(int decremento). A velocidade nunca pode ficar negativa e nunca
-pode ultrapassar 220 km/h. Explique como os métodos podem garantir essas regras sem expor os
-atributos diretamente.
+### 2. Fluxo de Execução (`Main`)
+O ponto de entrada da aplicação deve simular o seguinte cenário de teste automatizado:
+1.  Instanciar um contrato ativo para o desenvolvedor `"Rodrigo"`, com taxa horária de `R$ 80.00` e `180` horas registradas.
+2.  Exibir no console os dados iniciais obtidos via métodos `get`.
+3.  Processar e exibir o pagamento líquido aplicando a alíquota fiscal de `12.0%`.
+4.  Invocar a transição de estado para encerrar o contrato.
+5.  Re-executar o método de cálculo de pagamento para validar se a trava de segurança de contrato `"FINALIZADO"` está retornando com sucesso o valor `0.0`.
+
+## 🛠️ Tecnologias Utilizadas
+*   **Java JDK** (versão 11 ou superior recomendada)
+*   **IDE:** Visual Studio Code (VS Code)
+
+---
+*Desafio gerado para consolidação de fundamentos avançados de POO no ecossistema Java.*
