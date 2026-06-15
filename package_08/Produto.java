@@ -21,17 +21,16 @@ public class Produto {
 
     public int getQuantidade() {
         return quantidade;
-
-        //metodo para calcular o valor total em estoque
     }
     public int adicionarEstoque(int qtd) {
         this.quantidade += qtd;
         return this.quantidade;
     }
-    public void valorTotalEstoque(){
-        double valorTotal = this.preco * this.quantidade;
-        System.out.println("Valor total em estoque: " + valorTotal);
+    //metodo para calcular o valor total em estoque
+    public double valorTotalEstoque(){
+        return this.preco * this.quantidade;
     }
+
     public int removerEstoque(int qtd) {
         if (this.quantidade >= qtd) {
             this.quantidade -= qtd;

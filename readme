@@ -67,9 +67,7 @@ Este repositório contém uma coleção de exercícios desenvolvidos para pratic
 * Armazenar 10 produtos em um vetor;
 * Descobrir qual produto possui o maior valor em estoque;
 * Exibir o produto encontrado.
-
 ---
-
 # Exercício 3 – Sistema de Conta Bancária
 
 ## Classe `ContaBancaria`
