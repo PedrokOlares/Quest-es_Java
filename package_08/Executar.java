@@ -1,5 +1,4 @@
 package package_08;
-
 public class Executar {
     public static void main(String[]args){
    
@@ -16,7 +15,6 @@ public class Executar {
             System.out.printf("Valor total em estoque: R$ %.2f\n", produto.valorTotalEstoque());
             System.out.println("------------------------------------");
         }
-        
         // --- Lógica para encontrar maior e menor estoque ---
         // (Esta lógica deve ser feita fora do loop de relatório para evitar saídas repetidas)
         if (produtos.length > 0) {
@@ -35,7 +33,6 @@ public class Executar {
             System.out.println("Produto com MAIOR estoque: " + produtoMaiorEstoque.getNome() + " (" + produtoMaiorEstoque.getQuantidade() + " unidades)");
             System.out.println("Produto com MENOR estoque: " + produtoMenorEstoque.getNome() + " (" + produtoMenorEstoque.getQuantidade() + " unidades)");
         }
-
         // --- Exemplo de atualização de estoque ---
         System.out.println("\n--- Exemplo de Atualização (Notebook) ---");
         Produto notebook = produtos[0];
