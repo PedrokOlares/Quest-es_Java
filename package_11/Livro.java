@@ -11,10 +11,8 @@ public class Livro {
         this.autor = autor;
         this.ano = ano;
         this.disponivel = disponivel;
-        
     
     }
-
 
     public String getTitulo() {
         return titulo;
@@ -28,8 +26,24 @@ public class Livro {
         return ano;
     }
 
-    public boolean getdisponivel() {
+    public boolean isDisponivel() {
         return disponivel;
     }
-    
-}
+
+    public void emprestar() {
+        if (this.disponivel) {
+            this.disponivel = false;
+            System.out.println("O livro '" + this.titulo + "' foi emprestado com sucesso.");
+        } else {
+            System.out.println("O livro '" + this.titulo + "' não está disponível para empréstimo.");
+        }
+    }
+    public void devolver() {
+        if (!this.disponivel) {
+            this.disponivel = true;
+            System.out.println("O livro '" + this.titulo + "' foi devolvido com sucesso.");
+        } else {
+            System.out.println("O livro '" + this.titulo + "' já estava disponível.");
+        }
+    }
+}   
