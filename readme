@@ -1,39 +1,323 @@
-# 🚀 Desafio Fintech: Sistema de Gestão de Contratos de Freelancers
+# 📚 Exercícios de Programação Orientada a Objetos em Java
 
-Módulo financeiro avançado desenvolvido em Java para o gerenciamento, cálculo de provisões fiscais, bônus de produtividade e controle de status de contratos de desenvolvedores freelancers.
+Este repositório contém uma coleção de exercícios desenvolvidos para praticar os principais conceitos de **Programação Orientada a Objetos (POO)** em Java.
 
-## 📌 Contexto do Desafio
-O objetivo deste projeto é aplicar conceitos rígidos de **Orientação a Objetos**, focando principalmente em **Encapsulamento**, imutabilidade de dados (restrição de métodos modificadores `set`) e implementação de regras de negócio complexas centralizadas no modelo.
+## 🎯 Conceitos abordados
 
-## ⚙️ Regras de Negócio e Arquitetura
-
-### 1. Entidade `Contrato`
-A classe deve conter os seguintes atributos e comportamentos:
-*   **Atributos Privados (`private`):**
-    *   `desenvolvedor` (String) - Imutável após a criação.
-    *   `valorHora` (double) - Imutável após a criação.
-    *   `horasTrabalhadas` (int)
-    *   `status` (String) - Inicializado automaticamente como `"ATIVO"`.
-*   **Encapsulamento Restrito:** Proibido o uso de métodos `set`. As alterações de estado devem ocorrer exclusivamente através de métodos de suporte específicos.
-*   **Método `calcularPagamentoLiquido(double impostoRetido)`:**
-    1.  **Validação de Estado:** Se o status do contrato for igual a `"FINALIZADO"`, o retorno deve ser obrigatoriamente `0.0`.
-    2.  **Cálculo Base:** $\text{Horas Trabalhadas} \times \text{Valor da Hora}$.
-    3.  **Gatilho de Bônus:** Se as horas trabalhadas forem estritamente superiores a 160 horas, aplica-se um bônus de **15%** sobre o valor base.
-    4.  **Dedução Fiscal:** O percentual de imposto passado por parâmetro (ex: `12.0` para 12%) deve ser calculado e subtraído sobre o montante acumulado (Base + Bônus).
-    5.  **Retorno:** Valor líquido final disponível para o profissional.
-*   **Método `finalizarContrato()`:** Transiciona o estado do atributo `status` de `"ATIVO"` para `"FINALIZADO"`.
-
-### 2. Fluxo de Execução (`Main`)
-O ponto de entrada da aplicação deve simular o seguinte cenário de teste automatizado:
-1.  Instanciar um contrato ativo para o desenvolvedor `"Rodrigo"`, com taxa horária de `R$ 80.00` e `180` horas registradas.
-2.  Exibir no console os dados iniciais obtidos via métodos `get`.
-3.  Processar e exibir o pagamento líquido aplicando a alíquota fiscal de `12.0%`.
-4.  Invocar a transição de estado para encerrar o contrato.
-5.  Re-executar o método de cálculo de pagamento para validar se a trava de segurança de contrato `"FINALIZADO"` está retornando com sucesso o valor `0.0`.
-
-## 🛠️ Tecnologias Utilizadas
-*   **Java JDK** (versão 11 ou superior recomendada)
-*   **IDE:** Visual Studio Code (VS Code)
+* Encapsulamento (`private`)
+* Getters e Setters
+* Construtores
+* Métodos
+* Vetores (`arrays`)
+* `ArrayList`
+* Composição entre classes
+* Busca e ordenação
+* Manipulação de objetos
+* Lógica de programação
+* Programação Orientada a Objetos
 
 ---
-*Desafio gerado para consolidação de fundamentos avançados de POO no ecossistema Java.*
+
+# Exercício 1 – Sistema de Funcionários
+
+## Classe `Funcionario`
+
+### Atributos privados
+
+* nome
+* cargo 
+* salario
+
+### Métodos
+
+* Construtor com todos os atributos;
+* Getters e Setters;
+* `aumentarSalario(double porcentagem);`
+* `mostrarDados();`
+
+### Requisitos do programa principal
+
+* Criar um vetor com 5 funcionários;
+* Ler os dados de todos os funcionários;
+* Aumentar em 10% o salário dos funcionários cujo cargo seja **Programador**;
+* Exibir todos os funcionários.
+
+---
+
+# Exercício 2 – Controle de Produtos em Estoque
+
+## Classe `Produto`
+
+### Atributos privados
+
+* nome
+* preco
+* quantidade
+
+### Métodos
+
+* Construtor;
+* Getters e Setters;
+* `adicionarEstoque(int qtd);`
+* `removerEstoque(int qtd);`
+* `valorTotalEstoque();`
+
+### Requisitos do programa principal
+
+* Armazenar 10 produtos em um vetor;
+* Descobrir qual produto possui o maior valor em estoque;
+* Exibir o produto encontrado.
+
+---
+
+# Exercício 3 – Sistema de Conta Bancária
+
+## Classe `ContaBancaria`
+
+### Atributos privados
+
+* titular
+* numeroConta
+* saldo
+
+### Métodos
+
+* Construtor;
+* Getters e Setters;
+* `depositar();`
+* `sacar();`
+* `transferir(ContaBancaria destino, double valor);`
+
+### Requisitos do programa principal
+
+* Criar três contas bancárias;
+* Realizar depósitos;
+* Fazer transferências entre as contas;
+* Mostrar o saldo final de todas.
+
+---
+
+# Exercício 4 – Cadastro de Alunos com Média
+
+## Classe `Aluno`
+
+### Atributos privados
+
+* nome
+* matricula
+* vetor de 4 notas (`double[] notas`)
+
+### Métodos
+
+* Construtor;
+* Getters e Setters;
+* `calcularMedia();`
+* `aprovado();`
+
+### Requisitos do programa principal
+
+* Cadastrar 8 alunos;
+* Mostrar:
+
+  * Quantidade de aprovados;
+  * Quantidade de reprovados;
+  * Aluno com maior média.
+
+---
+
+# Exercício 5 – Biblioteca com ArrayList
+
+## Classe `Livro`
+
+### Atributos
+
+* titulo
+* autor
+* ano
+* disponivel
+
+### Métodos
+
+* Construtor;
+* Getters e Setters;
+* `emprestar();`
+* `devolver();`
+* `mostrarInformacoes();`
+
+### Requisitos do programa principal
+
+* Utilizar um `ArrayList<Livro>`;
+* Cadastrar livros;
+* Emprestar alguns livros;
+* Mostrar apenas os livros disponíveis.
+
+---
+
+# Exercício 6 – Sistema de Pedidos (Composição)
+
+## Classe `Produto`
+
+### Atributos
+
+* nome
+* preco
+
+## Classe `Pedido`
+
+### Atributos
+
+* numeroPedido
+* ArrayList de produtos
+
+### Métodos
+
+* `adicionarProduto();`
+* `removerProduto();`
+* `calcularValorTotal();`
+* `mostrarPedido();`
+
+### Requisitos do programa principal
+
+* Criar um pedido;
+* Adicionar vários produtos;
+* Exibir o valor total do pedido.
+
+---
+
+# Exercício 7 – Campeonato de Futebol
+
+## Classe `Time`
+
+### Atributos privados
+
+* nome
+* vitorias
+* empates
+* derrotas
+
+### Métodos
+
+* Construtor;
+* Getters e Setters;
+* `calcularPontos();`
+
+### Pontuação
+
+* Vitória = 3 pontos;
+* Empate = 1 ponto.
+
+### Requisitos do programa principal
+
+* Armazenar 6 times em um vetor;
+* Descobrir:
+
+  * Campeão;
+  * Vice-campeão;
+* Exibir a classificação em ordem decrescente de pontos.
+
+---
+
+# Exercício 8 – Sistema de Locadora de Veículos
+
+## Classe `Veiculo`
+
+### Atributos
+
+* placa
+* modelo
+* valorDiaria
+* alugado
+
+### Métodos
+
+* Construtor;
+* Getters e Setters;
+* `alugar();`
+* `devolver();`
+* `calcularValor(int dias);`
+
+### Requisitos do programa principal
+
+* Utilizar um `ArrayList<Veiculo>`;
+* Cadastrar veículos;
+* Alugar alguns veículos;
+* Mostrar os disponíveis;
+* Calcular o valor para 7 dias de aluguel.
+
+---
+
+# Exercício 9 – Agenda de Contatos
+
+## Classe `Contato`
+
+### Atributos
+
+* nome
+* telefone
+* email
+
+### Métodos
+
+* Construtor;
+* Getters e Setters;
+* `mostrarContato();`
+
+### Requisitos do programa principal
+
+* Utilizar um `ArrayList<Contato>`;
+* Cadastrar contatos;
+* Buscar um contato pelo nome;
+* Exibir os dados caso seja encontrado;
+* Informar caso não exista.
+
+---
+
+# Exercício 10 – Sistema Completo de Turma
+
+## Classe `Aluno`
+
+### Atributos
+
+* nome
+* matricula
+* `ArrayList<Double> notas`
+
+### Métodos
+
+* `adicionarNota();`
+* `calcularMedia();`
+* `mostrarAluno();`
+
+## Classe `Turma`
+
+### Atributos
+
+* nome da turma
+* `ArrayList<Aluno> alunos`
+
+### Métodos
+
+* `adicionarAluno();`
+* `removerAluno();`
+* `calcularMediaGeral();`
+* `mostrarAprovados();`
+* `mostrarReprovados();`
+* `alunoMaiorMedia();`
+
+### Requisitos do programa principal
+
+* Criar uma turma;
+* Cadastrar vários alunos;
+* Adicionar notas para cada aluno;
+* Exibir:
+
+  * Média geral da turma;
+  * Alunos aprovados;
+  * Alunos reprovados;
+  * Aluno com maior média.
+
+---
+
+# 🚀 Objetivo
+
+Esses exercícios têm como objetivo fortalecer a base em Programação Orientada a Objetos e preparar para projetos maiores e aplicações reais em Java.
