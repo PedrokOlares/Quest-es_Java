@@ -43,7 +43,7 @@ public class Livro {
             this.disponivel = true;
             System.out.println("O livro '" + this.titulo + "' foi devolvido com sucesso.");
         } else {
-            System.out.println("O livro '" + this.titulo + "' já estava disponível.");
+        System.out.println("O livro '" + this.titulo + "' já estava disponível.");
         }
     }
 }   
