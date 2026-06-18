@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burger House - Hambúrgueres Extraordinários que Desafiam o Impossível</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'inter': ['Inter', 'sans-serif'],
+                        'playfair': ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                        'slide-in-left': 'slideInLeft 0.8s ease-out forwards',
+                        'scale-in': 'scaleIn 0.5s ease-out forwards',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' },
+                        },
+                        scaleIn: {
+                            '0%': { opacity: '0', transform: 'scale(0.9)' },
+                            '100%': { opacity: '1', transform: 'scale(1)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #ff6b6b, #ffd93d, #6bcf7f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .glass-effect {
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .burger-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .burger-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        .burger-card:hover .burger-image {
+            transform: scale(1.1) rotate(2deg);
+        }
+        .burger-image {
+            transition: transform 0.4s ease;
+        }
+        .fade-in-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.4s ease-out;
+        }
+        .fade-in-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .slide-in-left-scroll {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: all 0.4s ease-out;
+        }
+        .slide-in-left-scroll.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .slide-in-right-scroll {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.4s ease-out;
+        }
+        .slide-in-right-scroll.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scale-in-scroll {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.4s ease-out;
+        }
+        .scale-in-scroll.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+    </style>
+</head>
+<body class="font-inter bg-black text-white overflow-x-hidden">
+    <!-- Header -->
+    <header class="fixed w-full top-0 z-50 bg-black/20 backdrop-blur-xl border-b border-white/10 shadow-2xl">
+        <nav class="container mx-auto px-6 py-6">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold font-playfair gradient-text">BURGER HOUSE</div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="text-gray-300 hover:text-white font-medium transition duration-300 relative group">
+                        Início
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#menu" class="text-gray-300 hover:text-white font-medium transition duration-300 relative group">
+                        Menu
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#testimonials" class="text-gray-300 hover:text-white font-medium transition duration-300 relative group">
+                        Reviews
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="#contact" class="text-gray-300 hover:text-white font-medium transition duration-300 relative group">
+                        Contato
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-gradient-to-r from-orange-400 to-red-500 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                </div>
+                <button class="bg-gradient-to-r from-orange-500 to-red-600 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transition duration-300 transform hover:scale-105">
+                    Pedir Agora
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden pt-24">
+        <!-- Background with parallax effect -->
+        <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-black to-gray-800"></div>
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1550547660-d9450f859349?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center opacity-40"></div>
+        
+        <!-- Floating elements -->
+        <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-orange-400 to-red-500 rounded-full opacity-20 animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full opacity-20 animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute top-1/2 right-20 w-12 h-12 bg-gradient-to-r from-red-400 to-pink-500 rounded-full opacity-20 animate-float" style="animation-delay: 4s;"></div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10 mt-16">
+            <div class="max-w-6xl mx-auto">
+                <div class="animate-fade-in-up">
+                    <h1 class="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-black font-playfair mb-4 sm:mb-6 leading-tight px-2">
+                        HAMBÚRGUERES
+                        <span class="block gradient-text">EXTRAORDINÁRIOS</span>
+                    </h1>
+                </div>
+                <div class="animate-fade-in-up" style="animation-delay: 0.2s;">
+                    <p class="text-xs sm:text-sm md:text-lg lg:text-xl mb-6 sm:mb-8 text-gray-300 font-light max-w-2xl mx-auto leading-relaxed px-6">
+                        Cada mordida é uma <span class="text-orange-400 font-semibold">experiência única</span>. 
+                        Preparados com paixão, servidos com alma.
+                    </p>
+                </div>
+                
+                <!-- Hero burger image -->
+                <div class="animate-scale-in mb-8 sm:mb-12" style="animation-delay: 0.4s;">
+                    <div class="relative w-56 h-56 sm:w-72 sm:h-72 md:w-80 md:h-80 mx-auto">
+                        <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" 
+                             alt="Burger Extraordinário" 
+                             class="w-full h-full object-cover rounded-full shadow-2xl animate-float">
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-t from-orange-500/20 to-transparent"></div>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in-up flex justify-center items-center px-6 mb-16" style="animation-delay: 0.6s;">
+                    <a href="#menu" class="group w-full sm:w-auto max-w-sm bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-full text-base sm:text-lg transition-all duration-300 shadow-2xl hover:shadow-orange-500/25 transform hover:-translate-y-2 hover:scale-105 text-center">
+                        <span class="flex items-center justify-center">
+                            Descobrir Menu
+                            <svg class="w-4 h-4 sm:w-5 sm:h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-gradient-to-b from-black to-gray-900 relative overflow-hidden">
+        <!-- Background effects -->
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80')] opacity-5"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <div class="fade-in-on-scroll">
+                    <span class="text-orange-400 font-semibold text-lg tracking-wider uppercase">Menu Exclusivo</span>
+                    <h2 class="text-3xl md:text-5xl font-black font-playfair mt-4 mb-4 gradient-text">
+                        CRIAÇÕES ÉPICAS
+                    </h2>
+                    <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                        Cada hambúrguer é uma <span class="text-orange-400">obra-prima</span> criada por nossos chefs. 
+                        Prepare-se para uma experiência que vai <span class="text-red-400">revolucionar</span> seu paladar.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 xl:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Burger 1 - The Beast -->
+                <div class="burger-card group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-700 hover:border-orange-500/50 scale-in-scroll">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="The Beast" 
+                             class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                            BEST SELLER
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">
+                            THE BEAST
+                        </h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                            <span class="text-orange-400 font-semibold">DUPLO SMASH BEEF 200g</span> + bacon artesanal crocante + 
+                            queijo cheddar aged + molho secret sauce + cebola caramelizada. 
+                            <span class="text-red-400 font-semibold">Impossível resistir.</span>
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-2xl font-black text-white">R$32,90</div>
+                            <button class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                PEDIR AGORA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burger 2 - Green Revolution -->
+                <div class="burger-card group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-700 hover:border-green-500/50 scale-in-scroll">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1520072959219-c595dc870360?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="Green Revolution" 
+                             class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            PLANT BASED
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-green-400 transition-colors">
+                            GREEN REVOLUTION
+                        </h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                            <span class="text-green-400 font-semibold">PLANT PROTEIN</span> artesanal + abacate cremoso + 
+                            rúcula selvagem + tomate confit + queijo vegano premium + aioli de ervas. 
+                            <span class="text-green-400 font-semibold">Revolução verde no seu paladar.</span>
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-2xl font-black text-white">R$28,90</div>
+                            <button class="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-400 hover:to-emerald-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                PEDIR AGORA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burger 3 - Hell Fire -->
+                <div class="burger-card group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-700 hover:border-red-500/50 scale-in-scroll">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://i.pinimg.com/736x/4a/87/25/4a8725f10d01c7e006f4f30f8f9d7163.jpg" 
+                             alt="Hell Fire" 
+                             class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-red-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                            🔥 EXTREME HOT
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-red-400 transition-colors">
+                            HELL FIRE
+                        </h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                            <span class="text-red-400 font-semibold">BEEF ANGUS</span> + pimenta ghost pepper + 
+                            jalapeños grelhados + queijo pepper jack + molho infernal + cebola roxa. 
+                            <span class="text-red-400 font-semibold">Só para os corajosos!</span>
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-2xl font-black text-white">R$30,90</div>
+                            <button class="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-400 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                DESAFIAR
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burger 4 - Cheese Kingdom -->
+                <div class="burger-card group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-700 hover:border-yellow-500/50 scale-in-scroll">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80" 
+                             alt="Cheese Kingdom" 
+                             class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-yellow-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            CHEESE LOVERS
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">
+                            CHEESE KINGDOM
+                        </h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                            <span class="text-yellow-400 font-semibold">DUPLO BEEF</span> + cheddar aged + 
+                            mozzarella + gorgonzola + cream cheese + parmesão + molho cheese supreme. 
+                            <span class="text-yellow-400 font-semibold">Reino dos queijos!</span>
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-2xl font-black text-white">R$36,90</div>
+                            <button class="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-400 hover:to-orange-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                PEDIR AGORA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burger 5 - BBQ Legend -->
+                <div class="burger-card group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-700 hover:border-amber-500/50 scale-in-scroll">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://i.pinimg.com/736x/17/6e/57/176e57d50e841f240b97d6fa8d672822.jpg" 
+                             alt="BBQ Legend" 
+                             class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            SMOKED
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">
+                            BBQ LEGEND
+                        </h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                            <span class="text-amber-400 font-semibold">BEEF DEFUMADO</span> + bacon artesanal + 
+                            cebola caramelizada + queijo provolone + molho BBQ bourbon + pickles. 
+                            <span class="text-amber-400 font-semibold">Tradição americana!</span>
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-2xl font-black text-white">R$33,90</div>
+                            <button class="bg-gradient-to-r from-amber-500 to-orange-600 hover:from-amber-400 hover:to-orange-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                PEDIR AGORA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Burger 6 - Crispy Thunder -->
+                <div class="burger-card group bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl overflow-hidden shadow-2xl border border-gray-700 hover:border-blue-500/50 scale-in-scroll">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="https://i.pinimg.com/736x/2e/aa/37/2eaa37e01e3ad7da07564c2a7ec6ce5a.jpg" 
+                             alt="Crispy Thunder" 
+                             class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                            CRISPY
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">
+                            CRISPY THUNDER
+                        </h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                            <span class="text-blue-400 font-semibold">FRANGO PREMIUM</span> empanado crocante + 
+                            maionese trufa + alface americana + tomate heritage + queijo suíço. 
+                            <span class="text-blue-400 font-semibold">Crocância perfeita!</span>
+                        </p>
+                        <div class="flex justify-between items-center">
+                            <div class="text-2xl font-black text-white">R$29,90</div>
+                            <button class="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-400 hover:to-purple-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                PEDIR AGORA
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Combos Especiais Section -->
+            <div class="mt-20">
+                <div class="text-center mb-16">
+                    <div class="fade-in-on-scroll">
+                        <span class="text-purple-400 font-semibold text-lg tracking-wider uppercase">Combos Épicos</span>
+                        <h3 class="text-3xl md:text-4xl font-black font-playfair mt-4 mb-4 gradient-text">
+                            EXPERIÊNCIAS COMPLETAS
+                        </h3>
+                        <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                            Combos <span class="text-purple-400">irresistíveis</span> que combinam nossos melhores hambúrgueres 
+                            com acompanhamentos <span class="text-pink-400">perfeitos</span>. Economia garantida!
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                    <!-- Combo 1 - Duo Supremo -->
+                    <div class="burger-card group bg-gradient-to-br from-purple-900/50 to-pink-900/50 rounded-xl overflow-hidden shadow-2xl border border-purple-700/50 hover:border-purple-500 scale-in-scroll relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-600/10 to-pink-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://i.pinimg.com/736x/6e/d2/f7/6ed2f7845d37f3341f8ad0df586e2241.jpg" 
+                                 alt="Duo Supremo" 
+                                 class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute top-4 right-4 bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                                💑 DUO PERFEITO
+                            </div>
+                            <div class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                                ECONOMIA 25%
+                            </div>
+                        </div>
+                        <div class="p-6 relative z-10">
+                            <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                                DUO SUPREMO
+                            </h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                                <span class="text-purple-400 font-semibold">2x THE BEAST</span> + batatas rústicas premium + 
+                                2x refrigerantes 500ml + molhos especiais + sobremesa brownie. 
+                                <span class="text-pink-400 font-semibold">Perfeito para dividir!</span>
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <div class="text-xs text-gray-400 line-through">De R$89,80</div>
+                                    <div class="text-2xl font-black text-white">R$67,90</div>
+                                </div>
+                                <button class="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-400 hover:to-pink-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                    PEDIR COMBO
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Combo 2 - Família Feliz -->
+                    <div class="burger-card group bg-gradient-to-br from-orange-900/50 to-red-900/50 rounded-xl overflow-hidden shadow-2xl border border-orange-700/50 hover:border-orange-500 scale-in-scroll relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-orange-600/10 to-red-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://i.pinimg.com/736x/ab/58/d0/ab58d0f8f26cbe8c5617ca8702bd2cf1.jpg" 
+                                 alt="Família Feliz" 
+                                 class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute top-4 right-4 bg-gradient-to-r from-orange-600 to-red-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                                👨‍👩‍👧‍👦 FAMÍLIA
+                            </div>
+                            <div class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                                ECONOMIA 30%
+                            </div>
+                        </div>
+                        <div class="p-6 relative z-10">
+                            <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-orange-400 transition-colors">
+                                FAMÍLIA FELIZ
+                            </h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                                <span class="text-orange-400 font-semibold">4x Hambúrgueres</span> à escolha + 
+                                batatas família + 4x bebidas + nuggets crispy + sorvete família. 
+                                <span class="text-red-400 font-semibold">Diversão garantida!</span>
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <div class="text-xs text-gray-400 line-through">De R$159,60</div>
+                                    <div class="text-2xl font-black text-white">R$119,90</div>
+                                </div>
+                                <button class="bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                    PEDIR COMBO
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Combo 3 - Night Gamer -->
+                    <div class="burger-card group bg-gradient-to-br from-blue-900/50 to-cyan-900/50 rounded-xl overflow-hidden shadow-2xl border border-blue-700/50 hover:border-cyan-500 scale-in-scroll relative">
+                        <div class="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-cyan-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div class="relative h-48 overflow-hidden">
+                            <img src="https://i.pinimg.com/736x/5e/e4/f8/5ee4f8bec88722a96412f2c0fdfaf286.jpg" 
+                                 alt="Night Gamer" 
+                                 class="burger-image w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                            <div class="absolute top-4 right-4 bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                                🎮 GAMER MODE
+                            </div>
+                            <div class="absolute top-4 left-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-bold">
+                                ECONOMIA 20%
+                            </div>
+                        </div>
+                        <div class="p-6 relative z-10">
+                            <h3 class="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
+                                NIGHT GAMER
+                            </h3>
+                            <p class="text-gray-300 mb-4 leading-relaxed text-sm">
+                                <span class="text-cyan-400 font-semibold">HELL FIRE</span> + batatas bacon + 
+                                energy drink + snacks gamer + doces energy + entrega prioritária. 
+                                <span class="text-blue-400 font-semibold">Fuel para madrugada!</span>
+                            </p>
+                            <div class="flex justify-between items-center">
+                                <div class="flex flex-col">
+                                    <div class="text-xs text-gray-400 line-through">De R$54,80</div>
+                                    <div class="text-2xl font-black text-white">R$43,90</div>
+                                </div>
+                                <button class="bg-gradient-to-r from-blue-500 to-cyan-600 hover:from-blue-400 hover:to-cyan-500 text-white px-4 py-2 rounded-lg font-bold text-sm transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                    PEDIR COMBO
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu CTA -->
+            <div class="text-center mt-16">
+                <div class="fade-in-on-scroll">
+                    <p class="text-gray-300 text-xl mb-8">
+                        Pronto para <span class="text-orange-400 font-semibold">uma experiência completa</span>? Monte seu pedido ideal!
+                    </p>
+                    <button class="bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold py-4 px-12 rounded-full text-xl transition-all duration-300 shadow-2xl hover:shadow-purple-500/25 transform hover:-translate-y-1 hover:scale-105">
+                        Finalizar Pedido
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-900 to-black relative overflow-hidden">
+        <!-- Animated background elements -->
+        <div class="absolute top-0 left-0 w-full h-full">
+            <div class="absolute top-20 left-20 w-32 h-32 bg-gradient-to-r from-orange-400/10 to-red-500/10 rounded-full animate-pulse"></div>
+            <div class="absolute bottom-20 right-20 w-40 h-40 bg-gradient-to-r from-red-400/10 to-pink-500/10 rounded-full animate-pulse" style="animation-delay: 2s;"></div>
+        </div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <div class="fade-in-on-scroll">
+                    <span class="text-orange-400 font-semibold text-lg tracking-wider uppercase">Nossa Diferença</span>
+                    <h2 class="text-4xl md:text-5xl font-black font-playfair mt-4 mb-6 text-white">
+                        EXCELÊNCIA EM <span class="gradient-text">CADA DETALHE</span>
+                    </h2>
+                    <p class="text-lg text-gray-300 max-w-2xl mx-auto leading-relaxed">
+                        Não fazemos apenas hambúrgueres. Criamos <span class="text-orange-400 font-semibold">experiências inesquecíveis</span> 
+                        que vão além do extraordinário.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+                <div class="group text-center p-8 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-700 hover:border-orange-500/50 transition-all duration-500 hover:transform hover:-translate-y-2 slide-in-left-scroll">
+                    <div class="relative mb-8">
+                        <div class="bg-gradient-to-r from-orange-500 to-red-600 w-24 h-24 mx-auto rounded-2xl flex items-center justify-center text-4xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-2xl">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2M21 9V7L15 1H5C3.9 1 3 1.9 3 3V9C3 10.1 3.9 11 5 11V19C5 20.1 5.9 21 7 21H17C18.1 21 19 20.1 19 19V11C20.1 11 21 10.1 21 9M19 7V9H5V7H19Z"/>
+                        </svg>
+                        </div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-orange-500/20 to-red-600/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-orange-400 transition-colors">
+                        CARNE WAGYU PREMIUM
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        Selecionamos apenas <span class="text-orange-400 font-semibold">carnes premium Wagyu</span>, 
+                        maturadas por 21 dias para atingir o sabor e maciez perfeitos. 
+                        <span class="text-red-400">Qualidade incomparável.</span>
+                    </p>
+                </div>
+                
+                <div class="group text-center p-8 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-700 hover:border-green-500/50 transition-all duration-500 hover:transform hover:-translate-y-2 fade-in-on-scroll">
+                    <div class="relative mb-8">
+                        <div class="bg-gradient-to-r from-green-500 to-emerald-600 w-24 h-24 mx-auto rounded-2xl flex items-center justify-center text-4xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-2xl">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M17,8C8,10 5.9,16.17 3.82,21.34L5.71,22L6.66,19.7C7.14,19.87 7.64,20 8,20C19,20 22,3 22,3C21,5 14,5.25 9,6.25C4,7.25 2,11.5 2,13.5C2,15.5 3.75,17.25 3.75,17.25C7,8 17,8 17,8Z"/>
+                        </svg>
+                        </div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-green-500/20 to-emerald-600/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-green-400 transition-colors text-center">
+                        INGREDIENTES ORGÂNICOS
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed text-center text-sm">
+                        <span class="text-green-400 font-semibold">100% orgânicos</span> e colhidos diariamente 
+                        de produtores locais. Cada vegetal é selecionado à mão para garantir 
+                        <span class="text-green-400">frescor máximo</span> e sabor autêntico.
+                    </p>
+                </div>
+                
+                <div class="group text-center p-8 bg-gradient-to-br from-gray-800/50 to-gray-900/50 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-all duration-500 hover:transform hover:-translate-y-2 slide-in-right-scroll">
+                    <div class="relative mb-8">
+                        <div class="bg-gradient-to-r from-blue-500 to-purple-600 w-24 h-24 mx-auto rounded-2xl flex items-center justify-center text-4xl transform group-hover:scale-110 group-hover:rotate-6 transition-all duration-500 shadow-2xl">
+                        <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M13,9H18.5L13,3.5V9M6,2H14L20,8V20A2,2 0 0,1 18,22H6C4.89,22 4,21.1 4,20V4C4,2.89 4.89,2 6,2M15,18V16H6V18H15M18,14V12H6V14H18Z"/>
+                        </svg>
+                        </div>
+                        <div class="absolute -inset-4 bg-gradient-to-r from-blue-500/20 to-purple-600/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-4 group-hover:text-blue-400 transition-colors">
+                        ENTREGA NINJA
+                    </h3>
+                    <p class="text-gray-300 leading-relaxed text-sm">
+                        <span class="text-blue-400 font-semibold">Entrega em 15 minutos</span> com nossa frota 
+                        especializada. Seu hambúrguer chega <span class="text-purple-400 font-semibold">quentinho e perfeito</span>, 
+                        como se acabasse de sair da chapa.
+                    </p>
+                </div>
+            </div>
+            
+            <!-- Stats section -->
+            <div class="mt-20 grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto text-center">
+                <div class="scale-in-scroll">
+                    <div class="text-3xl font-black gradient-text mb-2">50K+</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wider">Clientes Felizes</div>
+                </div>
+                <div class="scale-in-scroll">
+                    <div class="text-3xl font-black gradient-text mb-2">4.9★</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wider">Avaliação Média</div>
+                </div>
+                <div class="scale-in-scroll">
+                    <div class="text-3xl font-black gradient-text mb-2">15min</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wider">Tempo Médio</div>
+                </div>
+                <div class="scale-in-scroll">
+                    <div class="text-3xl font-black gradient-text mb-2">24/7</div>
+                    <div class="text-gray-400 text-xs uppercase tracking-wider">Sempre Aberto</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-16 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">O que Nossos Clientes Dizem</h2>
+                <p class="text-lg text-gray-600">Depoimentos reais de quem já provou</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="text-gray-600 mb-4 italic text-sm">"O Monster Bacon é simplesmente incrível! Nunca comi um hambúrguer tão saboroso. A carne é suculenta e os ingredientes são fresquíssimos. Virei cliente fiel!"</p>
+                    <div class="flex items-center">
+                        <div class="bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold mr-4 text-sm">
+                            M
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">Maria Silva</h4>
+                            <p class="text-gray-600 text-xs">Cliente desde 2023</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="text-gray-600 mb-4 italic text-sm">"Sou vegetariano e estava cético, mas o Veggie Supreme me conquistou completamente! Sabor incrível e qualidade excepcional. Recomendo a todos!"</p>
+                    <div class="flex items-center">
+                        <div class="bg-green-500 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold mr-4 text-sm">
+                            J
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">João Santos</h4>
+                            <p class="text-gray-600 text-xs">Cliente desde 2022</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-500 text-lg">⭐⭐⭐⭐⭐</div>
+                    </div>
+                    <p class="text-gray-600 mb-4 italic text-sm">"Entrega super rápida e hambúrguer chegou quentinho! O atendimento é excelente e a qualidade surpreende. Melhor hamburgueria da cidade!"</p>
+                    <div class="flex items-center">
+                        <div class="bg-red-500 w-10 h-10 rounded-full flex items-center justify-center text-white font-bold mr-4 text-sm">
+                            A
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 text-sm">Ana Costa</h4>
+                            <p class="text-gray-600 text-xs">Cliente desde 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 bg-gradient-to-br from-black via-gray-900 to-gray-800 text-white relative overflow-hidden">
+        <!-- Modern geometric background -->
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-orange-500/10 via-red-500/5 to-pink-500/10"></div>
+            <div class="absolute top-20 -left-20 w-80 h-80 bg-gradient-to-r from-orange-400/20 to-red-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 -right-20 w-96 h-96 bg-gradient-to-r from-red-400/20 to-pink-500/20 rounded-full blur-3xl"></div>
+            <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-60 h-60 bg-gradient-to-r from-yellow-400/10 to-orange-500/10 rounded-full blur-2xl"></div>
+        </div>
+        
+        <!-- Glass morphism overlay -->
+        <div class="absolute inset-0 backdrop-blur-sm bg-gradient-to-br from-white/5 to-transparent border-t border-white/10"></div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="max-w-5xl mx-auto">
+                <div class="fade-in-on-scroll">
+                    <h2 class="text-4xl md:text-6xl font-black font-playfair mb-6 leading-tight">
+                        HORA DE <span class="text-yellow-300">DECIDIR</span>
+                    </h2>
+                    <p class="text-xl md:text-2xl mb-12 font-light leading-relaxed">
+                        Seu próximo <span class="text-yellow-300 font-semibold">momento épico</span> está a apenas um clique de distância. 
+                        <br class="hidden md:block">
+                        <span class="text-yellow-300 font-semibold">Não resista mais.</span>
+                    </p>
+                </div>
+                
+                <!-- Benefits -->
+                <div class="grid md:grid-cols-3 gap-6 mb-12 scale-in-scroll">
+                    <div class="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                        <div class="bg-orange-500 rounded-full p-2 mr-3">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,8L9.5,8.5L12,10.5L14.5,8.5L12,8Z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-lg font-bold">ENTREGA RELÂMPAGO</div>
+                            <div class="text-yellow-200 text-sm">15 minutos ou é grátis</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                        <div class="bg-green-500 rounded-full p-2 mr-3">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12,2A10,10 0 0,1 22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2M12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12A8,8 0 0,0 12,4M11,16.5L6.5,12L7.91,10.59L11,13.67L16.59,8.09L18,9.5L11,16.5Z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-lg font-bold">FRETE GRÁTIS</div>
+                            <div class="text-yellow-200 text-sm">Pedidos acima de R$ 40</div>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-center bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20 hover:bg-white/15 transition-all duration-300">
+                        <div class="bg-purple-500 rounded-full p-2 mr-3">
+                            <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23,10C23,8.89 22.1,8 21,8H14.68L15.64,3.43C15.66,3.33 15.67,3.22 15.67,3.11C15.67,2.7 15.5,2.32 15.23,2.05L14.17,1L7.59,7.58C7.22,7.95 7,8.45 7,9V19A2,2 0 0,0 9,21H18C18.83,21 19.54,20.5 19.84,19.78L22.86,12.73C22.95,12.5 23,12.26 23,12V10.08L23,10M1,21H5V9H1V21Z"/>
+                            </svg>
+                        </div>
+                        <div class="text-left">
+                            <div class="text-lg font-bold">SATISFAÇÃO 100%</div>
+                            <div class="text-yellow-200 text-sm">Garantia ou devolvemos</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main CTA Button -->
+                <div class="flex justify-center fade-in-on-scroll">
+                    <button class="group bg-gradient-to-r from-orange-500 to-red-600 hover:from-orange-400 hover:to-red-500 text-white font-black py-5 px-12 rounded-2xl text-xl transition-all duration-300 shadow-2xl hover:shadow-orange-500/25 transform hover:-translate-y-2 hover:scale-105 relative overflow-hidden">
+                        <span class="relative z-10 flex items-center justify-center">
+                            FAZER PEDIDO AGORA
+                            <svg class="w-6 h-6 ml-3 group-hover:translate-x-2 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </span>
+                    </button>
+                </div>
+                
+                <p class="text-gray-300 mt-12 fade-in-on-scroll">
+                    Aberto 24/7 • Segunda a Domingo • Sempre prontos para você
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-yellow-500 mb-4">Burger House</h3>
+                    <p class="text-gray-400 mb-4 text-sm">Os melhores hambúrgueres da cidade, feitos com amor e ingredientes selecionados.</p>
+                    <div class="flex space-x-4">
+                        <div class="bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center text-black hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </div>
+                        <div class="bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center text-black hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </div>
+                        <div class="bg-yellow-500 w-10 h-10 rounded-full flex items-center justify-center text-black hover:scale-110 transition-transform">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Contato</h4>
+                    <div class="space-y-2 text-gray-400 text-sm">
+                        <p class="flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z"/></svg> Rua dos Sabores, 123</p>
+                        <p>São Paulo - SP</p>
+                        <p class="flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/></svg> (11) 99999-9999</p>
+                        <p class="flex items-center"><svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/></svg> contato@burgerhouse.com</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Horários</h4>
+                    <div class="space-y-2 text-gray-400 text-sm">
+                        <p>Segunda a Quinta: 18h - 2h</p>
+                        <p>Sexta e Sábado: 18h - 3h</p>
+                        <p>Domingo: 18h - 1h</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4 text-sm">Receba promoções exclusivas!</p>
+                    <div class="flex max-w-xs">
+                        <input type="email" placeholder="Seu e-mail" class="flex-1 px-3 py-2 text-sm rounded-l-lg text-black">
+                        <button class="bg-yellow-500 text-red-800 px-3 py-2 text-sm rounded-r-lg font-bold hover:bg-yellow-400 transition duration-300">
+                            OK
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2024 Burger House. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Enhanced glassmorphism scroll effect for header
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(0, 0, 0, 0.7)';
+                header.style.backdropFilter = 'blur(30px)';
+                header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.4)';
+                header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.15)';
+            } else {
+                header.style.background = 'rgba(0, 0, 0, 0.2)';
+                header.style.backdropFilter = 'blur(20px)';
+                header.style.boxShadow = '0 8px 32px rgba(0, 0, 0, 0.2)';
+                header.style.borderBottom = '1px solid rgba(255, 255, 255, 0.1)';
+            }
+        });
+
+        // Enhanced Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -30px 0px'
+        };
+
+        const scrollObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with scroll animation classes
+        document.querySelectorAll('.fade-in-on-scroll, .slide-in-left-scroll, .slide-in-right-scroll, .scale-in-scroll').forEach((element, index) => {
+            // Add staggered delay for multiple elements
+            element.style.transitionDelay = `${index * 0.05}s`;
+            scrollObserver.observe(element);
+        });
+
+        // Special handling for burger cards with individual delays
+        document.querySelectorAll('.burger-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+            scrollObserver.observe(card);
+        });
+
+        // Enhanced burger card hover effects
+        document.querySelectorAll('.burger-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-15px) scale(1.02)';
+                card.style.boxShadow = '0 25px 50px rgba(255, 107, 107, 0.3)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0) scale(1)';
+                card.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)';
+            });
+        });
+
+        // Parallax effect for floating elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            document.querySelectorAll('.animate-float').forEach((element, index) => {
+                element.style.transform = `translateY(${rate + (index * 20)}px)`;
+            });
+        });
+
+        // CTA button actions with improved feedback
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('PEDIR AGORA') || 
+                button.textContent.includes('FAZER PEDIDO') ||
+                button.textContent.includes('DESAFIAR')) {
+                
+                button.addEventListener('click', (e) => {
+                    // Add click animation
+                    button.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        button.style.transform = '';
+                    }, 150);
+                    
+                    // Show order message
+                    const burgerName = button.closest('.burger-card')?.querySelector('h3')?.textContent || 'seu hambúrguer';
+                    
+                    // Create success notification
+                    const notification = document.createElement('div');
+                    notification.className = 'fixed top-4 right-4 bg-green-600 text-white px-6 py-4 rounded-xl shadow-2xl z-50 transform translate-x-full transition-all duration-300';
+                    notification.innerHTML = `
+                        <div class="flex items-center">
+                            <div class="text-2xl mr-3">🎉</div>
+                            <div>
+                                <div class="font-bold">${burgerName} adicionado!</div>
+                                <div class="text-sm opacity-90">Redirecionando para o checkout...</div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    document.body.appendChild(notification);
+                    
+                    // Animate notification
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(0)';
+                    }, 100);
+                    
+                    // Remove notification
+                    setTimeout(() => {
+                        notification.style.transform = 'translateX(full)';
+                        setTimeout(() => {
+                            notification.remove();
+                        }, 300);
+                    }, 3000);
+                    
+                    console.log(`Pedido iniciado: ${burgerName}`);
+                });
+            }
+        });
+
+        // Add loading states to buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                if (this.textContent.includes('FAZER PEDIDO')) {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<div class="flex items-center justify-center"><div class="animate-spin mr-2">⭐</div>Processando...</div>';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                    }, 2000);
+                }
+            });
+        });
+
+        // Enhanced performance for mobile
+        if (window.innerWidth <= 768) {
+            document.querySelectorAll('.burger-card').forEach(card => {
+                card.style.transform = 'none';
+                card.addEventListener('touchstart', () => {
+                    card.style.transform = 'scale(0.98)';
+                });
+                card.addEventListener('touchend', () => {
+                    card.style.transform = 'scale(1)';
+                });
+            });
+        }
+    </script>
+</body>
+</html>
